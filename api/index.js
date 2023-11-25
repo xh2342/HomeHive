@@ -20,7 +20,7 @@ const port = 3000;
 // allow json as an input of the server
 app.use(express.json());
 
-app.use("/api/user/test", userRouter);
+app.use("/api/user", userRouter);
 
 app.use("/api/auth", authRouter);
 

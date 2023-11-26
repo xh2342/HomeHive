@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
@@ -75,6 +76,7 @@ function SignUp() {
         >
           {loading ? "Loading" : "Sign Up"}
         </button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5 justify-center">
         <p>Have an account?</p>

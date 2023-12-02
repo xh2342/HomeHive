@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 mongoose
@@ -19,6 +21,9 @@ const port = 3000;
 
 // allow json as an input of the server
 app.use(express.json());
+
+// allow the backend to access cookie
+app.use(cookieParser());
 
 app.use("/api/user", userRouter);
 

@@ -23,7 +23,7 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      dispatch(signInStart);
+      dispatch(signInStart());
 
       const res = await fetch("/api/auth/signin", {
         method: "POST",

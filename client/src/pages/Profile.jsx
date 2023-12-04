@@ -29,23 +29,11 @@ function Profile() {
   const [uploadError, setUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [userListings, setUserListings] = useState([]);
+  const [errorShowingListing, setErrorShowingListing] = useState(false);
   const dispatch = useDispatch();
 
-  // console.log(filePerc);
-  // console.log(uploadError);
-  // console.log(formData);
-
-  // firebase storage rules
-  //   service firebase.storage {
-  //   match /b/{bucket}/o {
-  //     match /{allPaths=**} {
-  //       allow read;
-  //       allow write: if
-  //       request.resource.size < 2 * 1024 * 1024 &&
-  //       request.resource.contentType.matches('image/.*')
-  //     }
-  //   }
-  // }
+  console.log(userListings);
 
   useEffect(() => {
     if (file) {
@@ -151,6 +139,24 @@ function Profile() {
     }
   };
 
+  // handle show listings
+  const handleShowListings = async () => {
+    try {
+      setErrorShowingListing(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+
+      if (data.success === "false") {
+        setErrorShowingListing(true);
+        return;
+      }
+
+      setUserListings(data);
+      console.log(userListings.length);
+    } catch (error) {
+      setErrorShowingListing(true);
+    }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-center font-semibold p-3 mt-7 text-3xl">Profile</h1>
@@ -239,6 +245,42 @@ function Profile() {
       <p className="text-green-700">
         {updateSuccess ? "user is updated successfully" : ""}
       </p>
+      <button onClick={handleShowListings} className="text-green-700 w-full">
+        {" "}
+        Show Listings
+      </button>
+      <p className="text-red-700">
+        {errorShowingListing ? "error showing listings" : ""}
+      </p>
+      {userListings && userListings.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <h1 className="text-center my-7 text-xl">Your Listings</h1>
+          {userListings.map((listing) => (
+            <div
+              key={listing._id}
+              className="border rounded-lg flex items-center justify-between p-3"
+            >
+              <Link to={`/listing/${listing._id}`}>
+                <img
+                  src={listing.imageURLs[0]}
+                  alt="listing cover image"
+                  className="h-16 w-24 object-cover rounded-lg"
+                />
+              </Link>
+              <Link
+                to={`/listing/${listing._id}`}
+                className="hover:underline flex-1 truncate text-slate-500"
+              >
+                <p>{listing.name}</p>
+              </Link>
+              <div className="flex flex-col items-center text-xs gap-4">
+                <button className="uppercase text-red-700">delete</button>
+                <button className="uppercase text-green-700">edit</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

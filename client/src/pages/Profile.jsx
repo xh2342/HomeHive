@@ -273,7 +273,7 @@ function Profile() {
         {errorShowingListing ? "error showing listings" : ""}
       </p>
       {userListings && userListings.length > 0 && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mx-3">
           <h1 className="text-center my-7 text-xl">Your Listings</h1>
           {userListings.map((listing) => (
             <div
@@ -289,7 +289,7 @@ function Profile() {
               </Link>
               <Link
                 to={`/listing/${listing._id}`}
-                className="hover:underline flex-1 truncate text-slate-500"
+                className="hover:underline flex-1 mx-4 truncate text-slate-500"
               >
                 <p>{listing.name}</p>
               </Link>
@@ -300,7 +300,12 @@ function Profile() {
                 >
                   delete
                 </button>
-                <button className="uppercase text-green-700">edit</button>
+                <Link
+                  to={`/update-listing/${listing._id}`}
+                  className="uppercase text-green-700"
+                >
+                  edit
+                </Link>
               </div>
             </div>
           ))}

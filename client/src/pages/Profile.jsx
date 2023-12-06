@@ -33,8 +33,6 @@ function Profile() {
   const [errorShowingListing, setErrorShowingListing] = useState(false);
   const dispatch = useDispatch();
 
-  console.log(userListings);
-
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -157,6 +155,28 @@ function Profile() {
       setErrorShowingListing(true);
     }
   };
+
+  // delete listing from a profile
+  const handleDeleteListing = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: "DELETE",
+      });
+      const data = res.json;
+
+      if (data.success === "false") {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-center font-semibold p-3 mt-7 text-3xl">Profile</h1>
@@ -274,7 +294,12 @@ function Profile() {
                 <p>{listing.name}</p>
               </Link>
               <div className="flex flex-col items-center text-xs gap-4">
-                <button className="uppercase text-red-700">delete</button>
+                <button
+                  onClick={() => handleDeleteListing(listing._id)}
+                  className="uppercase text-red-700"
+                >
+                  delete
+                </button>
                 <button className="uppercase text-green-700">edit</button>
               </div>
             </div>

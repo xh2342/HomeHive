@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
+import { FaBath, FaBed, FaChair, FaHome, FaParking } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 function Listing() {
   const params = useParams();
@@ -9,6 +11,7 @@ function Listing() {
   const [error, setError] = useState(false);
   // State to manage the current slide index
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { currentUser } = useSelector((state) => state.user);
 
   // Function to handle moving to the previous slide
   const goToPreviousSlide = () => {
@@ -35,7 +38,6 @@ function Listing() {
       try {
         const res = await fetch(`/api/listing/get/${params.listingId}`);
         const data = await res.json();
-        console.log(data);
         if (data.success === false) {
           setLoading(false);
           setError(true);
@@ -65,7 +67,7 @@ function Listing() {
           className="relative w-full"
           data-carousel="slide"
         >
-          <div className={`relative h-56 overflow-hidden md:h-carousel`}>
+          <div className={`relative h-56 overflow-auto md:h-carousel`}>
             {listing.imageURLs.map((url, index) => (
               <div
                 className={`transition-opacity duration-700 ease-in-out ${
@@ -153,6 +155,76 @@ function Listing() {
               <span className="sr-only">Next</span>
             </span>
           </button>
+        </div>
+      )}
+
+      {listing && !loading && !error && (
+        <div className="mt-5 w-3/4 mx-auto">
+          {/* Title and address */}
+          <div className="flex justify-between items-end">
+            <div className="flex items-end gap-3">
+              <h1 className="text-3xl capitalize text-semibold">
+                {listing.name}
+              </h1>
+              <h2
+                className={`text-lg capitalize text-slate-100 rounded-md px-2 ${
+                  listing.rent ? "bg-green-700" : "bg-red-700"
+                }`}
+              >
+                for sale
+              </h2>
+            </div>
+            <div className="flex items-center gap-1">
+              <FaHome className="text-lg" />
+              <h3 className="text-md capitalize">{listing.address}</h3>
+            </div>
+          </div>
+
+          <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 mt-3">
+            <li className="flex items-center gap-1 whitespace-nowrap ">
+              <FaBed className="text-lg" />
+              {listing.bedrooms > 1
+                ? `${listing.bedrooms} beds `
+                : `${listing.bedrooms} bed `}
+            </li>
+            <li className="flex items-center gap-1 whitespace-nowrap ">
+              <FaBath className="text-lg" />
+              {listing.bathrooms > 1
+                ? `${listing.bathrooms} baths `
+                : `${listing.bathrooms} bath `}
+            </li>
+            <li className="flex items-center gap-1 whitespace-nowrap ">
+              <FaParking className="text-lg" />
+              {listing.parking ? "Parking spot" : "No Parking"}
+            </li>
+            <li className="flex items-center gap-1 whitespace-nowrap ">
+              <FaChair className="text-lg" />
+              {listing.furnished ? "Furnished" : "Unfurnished"}
+            </li>
+          </ul>
+
+          {/* price and offer */}
+          <div className="mt-3 flex gap-6 md:gap-12">
+            <h3 className="text-lg">
+              <span className="font-medium">Regular Price: </span>
+              <span className="digit-separator font-light">
+                {"$" + listing.regularPrice.toLocaleString()}
+              </span>
+            </h3>
+            {listing.offer && (
+              <h3 className="text-lg">
+                <span className="font-medium">Offer Price: </span>
+                <span className="digit-separator font-light">
+                  {"$" + listing.discountPrice.toLocaleString()}
+                </span>
+              </h3>
+            )}
+          </div>
+
+          <h3 className="text-lg font-medium capitalize mt-5">Description</h3>
+          <p className="font-light text-md gap-5 text-justify mt-3">
+            {listing.description}
+          </p>
         </div>
       )}
     </div>

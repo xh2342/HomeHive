@@ -338,7 +338,7 @@ export default function UpdateListing() {
                   {formData.type === "rent" ? (
                     <span className="text-xs">($ / month)</span>
                   ) : (
-                    <spac className="text-xs">$</spac>
+                    <span className="text-xs">$</span>
                   )}
                 </div>
               </div>

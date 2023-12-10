@@ -8,6 +8,10 @@ body {
 
 @layer utilities {
   .h-carousel {
-    height: 48rem; /* Adjust the height as needed */
+    height: 36rem; /* Adjust the height as needed */
   }
+}
+
+.digit-separator {
+  font-variant-numeric: tabular-nums;
 }

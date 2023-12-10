@@ -5,3 +5,9 @@
 body {
   background-color: rgb(241, 245, 241);
 }
+
+@layer utilities {
+  .h-carousel {
+    height: 48rem; /* Adjust the height as needed */
+  }
+}

@@ -218,7 +218,7 @@ export default function UpdateListing() {
           <textarea
             type="text"
             placeholder="Description"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg white-space: pre-wrap"
             id="description"
             required
             onChange={handleChange}

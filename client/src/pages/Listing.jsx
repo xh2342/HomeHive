@@ -159,28 +159,60 @@ function Listing() {
       )}
 
       {listing && !loading && !error && (
-        <div className="mt-5 w-3/4 mx-auto">
+        <div className="mt-10 w-1/2 mx-auto">
           {/* Title and address */}
-          <div className="flex justify-between items-end">
-            <div className="flex items-end gap-3">
-              <h1 className="text-3xl capitalize text-semibold">
-                {listing.name}
-              </h1>
-              <h2
-                className={`text-lg capitalize text-slate-100 rounded-md px-2 ${
-                  listing.rent ? "bg-green-700" : "bg-red-700"
-                }`}
-              >
-                for sale
-              </h2>
-            </div>
-            <div className="flex items-center gap-1">
-              <FaHome className="text-lg" />
-              <h3 className="text-md capitalize">{listing.address}</h3>
-            </div>
+
+          <div className="flex items-end gap-3 justify-between">
+            <h1 className="text-2xl capitalize text-semibold">
+              {listing.name}
+            </h1>
+            <h2
+              className={`text-md capitalize text-slate-100 rounded-md px-2 ${
+                listing.type === "rent" ? "bg-green-700" : "bg-red-700"
+              }`}
+            >
+              {listing.type === "rent" ? "for rent" : "for sale"}
+            </h2>
           </div>
 
-          <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 mt-3">
+          <div className="flex items-center gap-1 mt-2">
+            <FaHome className="text-md" />
+            <h3 className="text-sm capitalize">{listing.address}</h3>
+          </div>
+
+          {/* price and offer */}
+          <div className="mt-3 flex gap-6 md:gap-12">
+            <h3 className="text-sm">
+              <span className="font-medium">Regular Price: </span>
+              <span className="digit-separator font-light">
+                {"$" +
+                  listing.regularPrice.toLocaleString() +
+                  (listing.type === "rent" ? "/month" : "")}
+              </span>
+            </h3>
+            {listing.offer && (
+              <h3 className="text-sm">
+                <span className="font-medium">Offer Price: </span>
+                <span className="digit-separator font-light">
+                  {"$" +
+                    listing.discountPrice.toLocaleString() +
+                    (listing.type === "rent" ? "/month" : "")}
+                </span>
+              </h3>
+            )}
+          </div>
+
+          {/* description */}
+
+          <h3 className="text-lg font-medium capitalize mt-10">
+            About the Property
+          </h3>
+
+          <p className="font-light text-md gap-5 text-justify mt-3 leading-5 whitespace-pre-wrap">
+            {listing.description}
+          </p>
+
+          <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 mt-5">
             <li className="flex items-center gap-1 whitespace-nowrap ">
               <FaBed className="text-lg" />
               {listing.bedrooms > 1
@@ -202,29 +234,6 @@ function Listing() {
               {listing.furnished ? "Furnished" : "Unfurnished"}
             </li>
           </ul>
-
-          {/* price and offer */}
-          <div className="mt-3 flex gap-6 md:gap-12">
-            <h3 className="text-lg">
-              <span className="font-medium">Regular Price: </span>
-              <span className="digit-separator font-light">
-                {"$" + listing.regularPrice.toLocaleString()}
-              </span>
-            </h3>
-            {listing.offer && (
-              <h3 className="text-lg">
-                <span className="font-medium">Offer Price: </span>
-                <span className="digit-separator font-light">
-                  {"$" + listing.discountPrice.toLocaleString()}
-                </span>
-              </h3>
-            )}
-          </div>
-
-          <h3 className="text-lg font-medium capitalize mt-5">Description</h3>
-          <p className="font-light text-md gap-5 text-justify mt-3">
-            {listing.description}
-          </p>
         </div>
       )}
     </div>

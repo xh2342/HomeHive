@@ -10,6 +10,9 @@ body {
   .h-carousel {
     height: 36rem; /* Adjust the height as needed */
   }
+  .message-input {
+    width: 48rem;
+  }
 }
 
 .digit-separator {

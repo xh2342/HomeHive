@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { FaBath, FaBed, FaChair, FaHome, FaParking } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import Contact from "../components/Contact";
 
 function Listing() {
   const params = useParams();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [contact, setContact] = useState(false);
   // State to manage the current slide index
   const [currentSlide, setCurrentSlide] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
@@ -212,7 +214,7 @@ function Listing() {
             {listing.description}
           </p>
 
-          <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 mt-5">
+          <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6 my-5">
             <li className="flex items-center gap-1 whitespace-nowrap ">
               <FaBed className="text-lg" />
               {listing.bedrooms > 1
@@ -234,6 +236,15 @@ function Listing() {
               {listing.furnished ? "Furnished" : "Unfurnished"}
             </li>
           </ul>
+          {currentUser && listing.userRef !== currentUser._id && !contact && (
+            <button
+              onClick={() => setContact(true)}
+              className="border p-3 rounded-md text-md capitalize my-10 mx-auto block"
+            >
+              contact broker
+            </button>
+          )}
+          {contact && <Contact listing={listing} />}
         </div>
       )}
     </div>

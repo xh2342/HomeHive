@@ -18,3 +18,8 @@ body {
 .digit-separator {
   font-variant-numeric: tabular-nums;
 }
+
+.query-checkbox {
+  width: 20px;
+  height: 20px;
+}

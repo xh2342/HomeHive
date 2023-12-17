@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import ListingCard from "../components/ListingCard";
 
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
@@ -10,12 +11,13 @@ export default function Search() {
     furnished: false,
     offer: false,
     sort: "createdAt",
-    order: "desc",
+    order: "asc",
   });
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  console.log(listings);
   //   synchronize changes in url to the side bar
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -92,7 +94,7 @@ export default function Search() {
 
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "createdAt";
-      const order = e.target.value.split("_")[1] || "desc";
+      const order = e.target.value.split("_")[1] || "asc";
       setSidebarData({ ...sidebarData, sort, order });
     }
   };
@@ -114,7 +116,8 @@ export default function Search() {
   return (
     <div className="flex flex-col md:flex-row">
       {/* query parameters */}
-      <div className="flex-col w-1/4 gap-10 py-5 px-10 border md:min-h-screen">
+      <div className="flex flex-col w-1/4 gap-5 px-8 py-8 border md:min-h-screen">
+        <span className="pt-5 text-lg font-semibold capitalize">Filters</span>
         <form onSubmit={handleSubmit}>
           <div className="flex items-center border rounded-lg w-full gap-2">
             <FaSearch className="mx-2" />
@@ -204,7 +207,7 @@ export default function Search() {
             <h2 className="py-3">Sort</h2>
             <select
               className="border p-2 rounded-lg hover:bg-slate-100 text-sm"
-              defaultValue={"created_at_desc"}
+              defaultValue={"createdAt_asc"}
               id="sort_order"
               onChange={handleChange}
             >
@@ -212,7 +215,7 @@ export default function Search() {
                 Price: low to high
               </option>
               <option value="regularPrice_desc">Price: high to low</option>
-              <option value="createdAt_desc">Date: old to new</option>
+              <option value="createdAt_asc">Date: old to new</option>
               <option value="createdAt_desc">Date: new to old</option>
             </select>
           </div>
@@ -225,10 +228,23 @@ export default function Search() {
         </form>
       </div>
       {/* listings */}
-      <div className="flex flex-col items-center flex-1">
-        <span className="py-5 text-lg font-light capitalize">
-          resulting listings
+      <div className="flex flex-col flex-1 p-8">
+        <span className="py-5 text-lg font-semibold capitalize">
+          Search Results
         </span>
+        <div>
+          {!loading && listings.length === 0 && (
+            <h2 className="text-xl">No listing found!</h2>
+          )}
+          {loading && <h2 className="text-xl">Loading...</h2>}
+          {!loading && listings.length !== 0 && (
+            <div className="flex flex-wrap gap-4">
+              {listings.map((listing, index) => (
+                <ListingCard listing={listing} key={index} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

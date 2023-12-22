@@ -182,7 +182,7 @@ function Profile() {
       <h1 className="text-center font-semibold p-3 mt-7 text-3xl">Profile</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-4 items-center"
         id="profile-input"
       >
         <input
@@ -215,7 +215,7 @@ function Profile() {
         </p>
         <input
           type="text"
-          className="rounded-lg border p-3"
+          className="rounded-lg border p-3 w-full"
           placeholder="username"
           defaultValue={currentUser.username}
           id="username"
@@ -223,7 +223,7 @@ function Profile() {
         />
         <input
           type="email"
-          className="rounded-lg border p-3"
+          className="rounded-lg border p-3 w-full"
           placeholder="email"
           defaultValue={currentUser.email}
           id="email"
@@ -231,20 +231,20 @@ function Profile() {
         />
         <input
           type="password"
-          className="rounded-lg border p-3"
+          className="rounded-lg border p-3 w-full"
           placeholder="password"
           id="password"
           onChange={handleChange}
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-slate-50 rounded-lg p-3 font-semibold text-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="text-center w-[240px]  text-black rounded-lg p-3 font-light border text-lg capitalize hover:bg-slate-100 disabled:bg-slate-100"
         >
           {loading ? "loading..." : "update"}
         </button>
 
         <Link
-          className="bg-green-700 text-center text-slate-50 rounded-lg p-3 font-semibold text-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="text-center w-[240px] text-black rounded-lg p-3 font-light border text-lg capitalize hover:bg-slate-100 disabled:bg-slate-100"
           to={"/create-listing"}
         >
           Create Listing

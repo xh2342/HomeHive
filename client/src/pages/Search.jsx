@@ -17,7 +17,6 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  console.log(listings);
   //   synchronize changes in url to the side bar
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);

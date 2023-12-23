@@ -3,7 +3,7 @@ export default function About() {
     <div className="flex flex-col items-center md:flex-row">
       <div className="w-full h-screen md:w-1/2 overflow-hidden items-center justify-center flex-1">
         <img
-          src="../../public/about-page-cover.avif"
+          src="https://raw.githubusercontent.com/xh2342/HomeHive/main/client/public/about-page-cover.avif"
           alt="cover image"
           className="w-full h-full overflow-hidden max-w-full max-h-full object-cover"
         />

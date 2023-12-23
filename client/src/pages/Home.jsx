@@ -9,7 +9,6 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(offerListings);
 
   // Function to handle moving to the previous slide
   const goToPreviousSlide = () => {
@@ -181,7 +180,7 @@ export default function Home() {
       <div className="flex flex-col md:flex-row items-center">
         <div className="h-screen w-full md:w-1/2 overflow-hidden ">
           <img
-            src="../../public/cover2.jpg"
+            src="https://raw.githubusercontent.com/xh2342/HomeHive/main/client/public/cover2.jpg"
             alt="cover photo"
             className="h-full w-full object-cover"
           />

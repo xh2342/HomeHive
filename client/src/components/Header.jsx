@@ -31,7 +31,7 @@ function Header() {
         <Link to="/">
           <h1 className="font-semibold text-sm sm:text-2xl flex flex-wrap items-center">
             <img
-              src="../../public/homehive-cover.jpg"
+              src="https://raw.githubusercontent.com/xh2342/HomeHive/main/client/public/homehive-cover.jpg"
               alt="icon"
               className="w-[40px] h-full object-scale-down mx-2"
             />

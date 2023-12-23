@@ -1,8 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "swiper/css/bundle";
-import ListingItem from "../components/ListingCard";
-import { GoDotFill } from "react-icons/go";
 
 export default function Home() {
   const [listings, setListings] = useState([]);

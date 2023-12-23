@@ -27,9 +27,14 @@ function Header() {
 
   return (
     <header className="bg-slate-0 shadow-md">
-      <div className="flex justify-between items-center max-w-6 mx-auto p-3">
+      <div className="flex justify-between items-center max-w-6 mx-auto p-3 h-[72px]">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
+          <h1 className="font-semibold text-sm sm:text-2xl flex flex-wrap items-center">
+            <img
+              src="../../public/homehive-cover.jpg"
+              alt="icon"
+              className="w-[40px] h-full object-scale-down mx-2"
+            />
             <span className="text-yellow-500">Home</span>
             <span className="text-yellow-600">Hive</span>
           </h1>
@@ -55,6 +60,11 @@ function Header() {
           <Link to="/">
             <li className="hidden sm:inline text-slate-700 hover:underline">
               Home
+            </li>
+          </Link>
+          <Link to="/search">
+            <li className="hidden sm:inline text-slate-700 hover:underline">
+              Listings
             </li>
           </Link>
           <Link to="/about">

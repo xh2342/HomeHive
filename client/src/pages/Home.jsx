@@ -83,7 +83,7 @@ export default function Home() {
   return (
     <div>
       {/* swiper */}
-      {!loading && listings && (
+      {/* {!loading && listings && (
         <div
           id="default-carousel"
           className="relative w-full"
@@ -178,33 +178,41 @@ export default function Home() {
             </span>
           </button>
         </div>
-      )}
+      )} */}
 
-      {/* top */}
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Unlock Your Dream Home,
-          <br />
-          Just One Click Away!
-        </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          {`Discover your perfect
-          single-family home at HomeHive!`}{" "}
-          <br />
-          {` Simplifying your search for
-          comfort and charm. Lets find your dream home together!`}
+      <div className="flex flex-col md:flex-row items-center">
+        <div className="h-screen w-full md:w-1/2 overflow-hidden ">
+          <img
+            src="../../public/cover2.jpg"
+            alt="cover photo"
+            className="h-full w-full object-cover"
+          />
         </div>
-        <Link
-          to={"/search"}
-          className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
-        >
-          Lets get started...
-        </Link>
+        {/* introduction */}
+        <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+          <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
+            Unlock Your Dream Home,
+            <br />
+            Just One Click Away!
+          </h1>
+          <div className="text-gray-400 text-xs sm:text-sm">
+            {`Discover your perfect
+          single-family home at HomeHive!`}{" "}
+            <br />
+            {` Simplifying your search for
+          comfort and charm. Lets find your dream home together!`}
+          </div>
+          <Link
+            to={"/search"}
+            className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+          >
+            Lets get started...
+          </Link>
+        </div>
       </div>
 
       {/* listing results for offer, sale and rent */}
-
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+      {/* <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
         {rentListings && rentListings.length > 0 && (
           <div className="">
             <div className="my-3">
@@ -265,7 +273,7 @@ export default function Home() {
             )}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

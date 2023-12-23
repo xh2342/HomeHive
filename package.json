@@ -1,27 +1,24 @@
 {
-  "name": "homehive",
+  "name": "home-hive",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js",
-    "build": "npm install && npm install --prefix && npm run build --prefix client"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
-  "author": "Xiaofei Huang",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.7",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.3.0",
-    "mongoose": "^8.0.1",
-    "nodemon": "^3.0.1",
-    "react-redux": "^8.1.3"
+    "mongoose": "^7.5.0",
+    "nodemon": "^3.0.1"
   }
 }
